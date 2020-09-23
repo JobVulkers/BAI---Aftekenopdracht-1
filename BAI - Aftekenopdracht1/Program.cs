@@ -6,25 +6,27 @@ namespace BAI
 {
     public class BAI_Afteken1
     {
-      
+        /// ------------------------------------------------------------
+        /// <summary>
+        /// Filtert een lijst. Hierbij worden alle elementen die maar
+        /// 1x voorkomen verwijderd
+        /// </summary>
+        /// <param name="lijst">De lijst die wordt doorlopen
+        /// (wordt in functie veranderd)</param>
+        /// ------------------------------------------------------------
+
         public static void Opdr1FilterList(List<int> lijst)
         {
-
-            //Voegt dingen uit de ljst toe aan de dictionary
             Dictionary<int, int> D1 = new Dictionary<int, int>();
-
-            int j = 0;
             foreach (int i in lijst)
             {
                 try
                 {
                     D1.Add(i, 1);
-                    Console.WriteLine("toegevoegd");
                 }
-                catch (ArgumentException e)
+                catch (ArgumentException)
                 {
                     D1[i] = D1[i] + 1;
-                    Console.WriteLine("dubbele gevonden en toegevoegd");
                 }
             }
             foreach (KeyValuePair<int, int> kvp in D1)
@@ -32,18 +34,10 @@ namespace BAI
                 if (kvp.Value == 1)
                 {
                     D1.Remove(kvp.Key);
-
-                    Console.WriteLine("value verwijderd");
                 }
+                else
                 {
-                 
-                }
-            }
-            foreach (KeyValuePair<int, int> kvp in D1)
-            {
-                Console.WriteLine(kvp.Key + " " + kvp.Value);
-                {               
-
+                    Console.WriteLine(kvp.Key + " " + kvp.Value);
                 }
             }
         }
@@ -59,12 +53,9 @@ namespace BAI
         public static Queue<int> Opdr2aQueue50()
         {
             Queue<int> q = new Queue<int>();
-            int i;
-            for (i = 1; i <= 50; i++)
-            {
-                q.Enqueue(i);
-            }
-            Console.WriteLine(q.Count);
+
+            // *** IMPLEMENTATION HERE *** //
+
             return q;
         }
 
@@ -131,14 +122,14 @@ namespace BAI
             Console.WriteLine();
             Console.WriteLine("=== Opdracht 1 : FilterList ===");
             list = new List<int>() { 1, 3, 5, 7, 3, 8, 9, 5 };
-            /*PrintEnumerable(list);*/
+           /* PrintEnumerable(list);*/
             Opdr1FilterList(list);
-            /* PrintEnumerable(list);*/
+            /*PrintEnumerable(list);
 
             Console.WriteLine();
             Console.WriteLine("=== Opdracht 2 : Stack / Queue ===");
             queue = Opdr2aQueue50();
-            /*PrintEnumerable(queue);
+            PrintEnumerable(queue);
             stack = Opdr2bStackFromQueue(queue);
             PrintEnumerable(stack);
 
