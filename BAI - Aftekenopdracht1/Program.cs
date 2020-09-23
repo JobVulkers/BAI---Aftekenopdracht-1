@@ -17,22 +17,16 @@ namespace BAI
 
         public static void Opdr1FilterList(List<int> lijst)
         {
-
-            //Voegt dingen uit de ljst toe aan de dictionary
             Dictionary<int, int> D1 = new Dictionary<int, int>();
-
-            int j = 0;
             foreach (int i in lijst)
             {
                 try
                 {
                     D1.Add(i, 1);
-                    Console.WriteLine("toegevoegd");
                 }
-                catch (ArgumentException e)
+                catch (ArgumentException)
                 {
                     D1[i] = D1[i] + 1;
-                    Console.WriteLine("dubbele gevonden en toegevoegd");
                 }
             }
             foreach (KeyValuePair<int, int> kvp in D1)
@@ -40,18 +34,10 @@ namespace BAI
                 if (kvp.Value == 1)
                 {
                     D1.Remove(kvp.Key);
-
-                    Console.WriteLine("value verwijderd");
                 }
+                else
                 {
-
-                }
-            }
-            foreach (KeyValuePair<int, int> kvp in D1)
-            {
-                Console.WriteLine(kvp.Key + " " + kvp.Value);
-                {               
-
+                    Console.WriteLine(kvp.Key + " " + kvp.Value);
                 }
             }
         }
