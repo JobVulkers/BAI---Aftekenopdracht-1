@@ -57,7 +57,10 @@ namespace BAI
         {
             Queue<int> q = new Queue<int>();
 
-            // *** IMPLEMENTATION HERE *** //
+            for (int i = 1; i <= 50; i++)
+            {
+                q.Enqueue(i);
+            }
 
             return q;
         }
@@ -75,12 +78,23 @@ namespace BAI
         public static Stack<int> Opdr2bStackFromQueue(Queue<int> queue)
         {
             Stack<int> stack = new Stack<int>();
+            Queue<int> q = new Queue<int>();
+            for (int i = 1; i <= 50; i++)
+            {
+                q.Enqueue(i);
+            }
 
-            // *** IMPLEMENTATION HERE *** //
-
+            while (q.Count > 0)
+            {
+                int j = q.Dequeue();
+                if (j % 4 == 0)
+                {
+                    stack.Push(j);
+                }
+            }
             return stack;
         }
-
+      
 
         /// ------------------------------------------------------------
         /// <summary>
@@ -93,9 +107,34 @@ namespace BAI
         public static Stack<int> Opdr3RandomNumbers(int lower, int upper, int count)
         {
             Stack<int> stack = new Stack<int>();
-
-            // *** IMPLEMENTATION HERE *** //
-
+            Random random = new Random();
+            Dictionary<int, int> D1 = new Dictionary<int, int>();
+           
+            for(int i = 0; i < count; i++)
+            {
+                int getal = random.Next(lower, upper);
+                for (int x = 0; x <= D1.Keys.Count; x++)                    
+                    if (x == 0)
+                    {
+                        Console.WriteLine("testheee");
+                        D1.Add(i, getal);
+                        stack.Push(D1[i]);
+                        i++;
+                    }else
+                    {
+                        Console.WriteLine("hoi tijhs");
+                        //hier
+                        foreach (KeyValuePair<int, int> kvp in D1.ToList())
+                        {
+                            if (getal != kvp.Value)
+                            {
+                                
+                                    D1.Add(i+1, getal);
+                                    stack.Push(getal);
+                            }
+                        }
+                    }
+            }
             return stack;
         }
 
@@ -127,7 +166,7 @@ namespace BAI
             list = new List<int>() { 1, 3, 5, 7, 3, 8, 9, 5 };
            /* PrintEnumerable(list);*/
             Opdr1FilterList(list);
-            /*PrintEnumerable(list);
+            PrintEnumerable(list);
 
             Console.WriteLine();
             Console.WriteLine("=== Opdracht 2 : Stack / Queue ===");
@@ -140,9 +179,9 @@ namespace BAI
             Console.WriteLine("=== Opdracht 3 : Random number ===");
             stack = Opdr3RandomNumbers(100, 150, 10);
             PrintEnumerable(stack);
-            stack = Opdr3RandomNumbers(10, 15, 6);
-            PrintEnumerable(stack);
-            stack = Opdr3RandomNumbers(10_000, 50_000, 40_001);*/
+            //stack = Opdr3RandomNumbers(10, 15, 6);
+            //PrintEnumerable(stack);
+            //stack = Opdr3RandomNumbers(10_000, 50_000, 40_001);
         }
     }
 }
