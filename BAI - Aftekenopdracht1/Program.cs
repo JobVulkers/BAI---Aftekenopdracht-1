@@ -36,7 +36,7 @@ namespace BAI
                 {
                     Console.WriteLine($"{kvp.Key} verwijderd!");
                     D1.Remove(kvp.Key);
-                    
+
                 }
                 else
                 {
@@ -94,7 +94,7 @@ namespace BAI
             }
             return stack;
         }
-      
+
 
         /// ------------------------------------------------------------
         /// <summary>
@@ -109,79 +109,69 @@ namespace BAI
             Stack<int> stack = new Stack<int>();
             Random random = new Random();
             Dictionary<int, int> D1 = new Dictionary<int, int>();
-           
-            for(int i = 0; i < count; i++)
+            int i = 0;
+            while (i < count)
             {
                 int getal = random.Next(lower, upper);
-                for (int x = 0; x <= D1.Keys.Count; x++)                    
-                    if (x == 0)
-                    {
-                        Console.WriteLine("testheee");
-                        D1.Add(i, getal);
-                        stack.Push(D1[i]);
-                        i++;
-                    }else
-                    {
-                        Console.WriteLine("hoi tijhs");
-                        //hier
-                        foreach (KeyValuePair<int, int> kvp in D1.ToList())
-                        {
-                            if (getal != kvp.Value)
-                            {
-                                
-                                    D1.Add(i+1, getal);
-                                    stack.Push(getal);
-                            }
-                        }
-                    }
+                           
+                //hier
+                if (!D1.ContainsValue(getal))
+                {
+                    D1.Add(i, getal);
+                    stack.Push(getal);
+                    i++;
+                }
+
             }
-            return stack;
+                return stack;
+            
         }
 
 
-        /// ------------------------------------------------------------
-        /// <summary>
-        /// Drukt een IEnumerable (List, Stack, Queue, ..) van getallen
-        /// af naar de Console
-        /// <param name="enu">De IEnumerable om af te drukken</param>
-        /// ------------------------------------------------------------
-        static void PrintEnumerable(IEnumerable<int> enu)
-        {
-            foreach (int i in enu)
+            /// ------------------------------------------------------------
+            /// <summary>
+            /// Drukt een IEnumerable (List, Stack, Queue, ..) van getallen
+            /// af naar de Console
+            /// <param name="enu">De IEnumerable om af te drukken</param>
+            /// ------------------------------------------------------------
+            static void PrintEnumerable(IEnumerable<int> enu)
             {
-                Console.Write($"{i} ");
+                foreach (int i in enu)
+                {
+                    Console.Write($"{i} ");
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
-        }
 
 
-        static void Main(string[] args)
-        {
-            List<int> list;
-            Queue<int> queue;
-            Stack<int> stack;
+            static void Main(string[] args)
+            {
+                List<int> list;
+                Queue<int> queue;
+                Stack<int> stack;
 
-            Console.WriteLine();
-            Console.WriteLine("=== Opdracht 1 : FilterList ===");
-            list = new List<int>() { 1, 3, 5, 7, 3, 8, 9, 5 };
-           /* PrintEnumerable(list);*/
-            Opdr1FilterList(list);
-            PrintEnumerable(list);
+                Console.WriteLine();
+                Console.WriteLine("=== Opdracht 1 : FilterList ===");
+                list = new List<int>() { 1, 3, 5, 7, 3, 8, 9, 5 };
+                /* PrintEnumerable(list);*/
+                Opdr1FilterList(list);
+                PrintEnumerable(list);
 
-            Console.WriteLine();
-            Console.WriteLine("=== Opdracht 2 : Stack / Queue ===");
-            queue = Opdr2aQueue50();
-            PrintEnumerable(queue);
-            stack = Opdr2bStackFromQueue(queue);
-            PrintEnumerable(stack);
+                Console.WriteLine();
+                Console.WriteLine("=== Opdracht 2 : Stack / Queue ===");
+                queue = Opdr2aQueue50();
+                PrintEnumerable(queue);
+                stack = Opdr2bStackFromQueue(queue);
+                PrintEnumerable(stack);
 
-            Console.WriteLine();
-            Console.WriteLine("=== Opdracht 3 : Random number ===");
-            stack = Opdr3RandomNumbers(100, 150, 10);
-            PrintEnumerable(stack);
-            //stack = Opdr3RandomNumbers(10, 15, 6);
-            //PrintEnumerable(stack);
-            //stack = Opdr3RandomNumbers(10_000, 50_000, 40_001);
+                Console.WriteLine();
+                Console.WriteLine("=== Opdracht 3 : Random number ===");
+                stack = Opdr3RandomNumbers(100, 150, 10);
+                PrintEnumerable(stack);
+                stack = Opdr3RandomNumbers(10, 15, 6);
+                PrintEnumerable(stack);
+                stack = Opdr3RandomNumbers(10_000, 50_000, 40_001);
+            }
         }
     }
-}
+
