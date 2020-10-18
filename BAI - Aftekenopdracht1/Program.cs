@@ -12,7 +12,7 @@ namespace BAI
         /// Filtert een lijst. Hierbij worden alle elementen die maar
         /// 1x voorkomen verwijderd
         /// </summary>
-        /// <param name="lijst">De lijst die wordt doorlopen
+        /// <param name="input_list">De lijst die wordt doorlopen
         /// (wordt in functie veranderd)</param>
         /// ------------------------------------------------------------
 
@@ -55,14 +55,14 @@ namespace BAI
         /// ------------------------------------------------------------
         public static Queue<int> Opdr2aQueue50()
         {
-            Queue<int> q = new Queue<int>();
+            Queue<int> queue = new Queue<int>();
 
             for (int i = 1; i <= 50; i++)
             {
-                q.Enqueue(i);
+                queue.Enqueue(i);
             }
 
-            return q;
+            return queue;
         }
 
 
@@ -78,15 +78,10 @@ namespace BAI
         public static Stack<int> Opdr2bStackFromQueue(Queue<int> queue)
         {
             Stack<int> stack = new Stack<int>();
-            Queue<int> q = new Queue<int>();
-            for (int i = 1; i <= 50; i++)
-            {
-                q.Enqueue(i);
-            }
 
-            while (q.Count > 0)
+            while (queue.Count > 0)
             {
-                int j = q.Dequeue();
+                int j = queue.Dequeue();
                 if (j % 4 == 0)
                 {
                     stack.Push(j);
@@ -114,9 +109,9 @@ namespace BAI
             {
                 int getal = random.Next(lower, upper + 1 );
                 //hier
-                if (!D1.ContainsValue(getal))
+                if (!D1.ContainsKey(getal))
                 {
-                    D1.Add(i, getal);
+                    D1.Add(getal, i);
                     stack.Push(getal);
                     i++;
                 }
