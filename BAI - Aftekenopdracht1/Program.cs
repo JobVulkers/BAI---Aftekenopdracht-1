@@ -19,31 +19,43 @@ namespace BAI
         public static void Opdr1FilterList(List<int> lijst)
         {
             Dictionary<int, int> D1 = new Dictionary<int, int>();
-            foreach (int i in lijst)
-            {
-                try
-                {
-                    D1.Add(i, 1);
-                }
-                catch (ArgumentException)
-                {
-                    D1[i] = D1[i] + 1;
-                }
-            }
-            foreach (KeyValuePair<int, int> kvp in D1)
-            {
-                if (kvp.Value == 1)
-                {
-                    Console.WriteLine($"{kvp.Key} verwijderd!");
-                    D1.Remove(kvp.Key);
+            int i = 0;
 
-                }
-                else
+            foreach (int getal in lijst)
+            {
+                D1.Add(i, getal);
+                i++;
+            }
+
+            List<int> getallenList = new List<int>();
+
+            foreach (KeyValuePair<int, int> getallen in D1)
+            {
+                foreach (KeyValuePair<int, int> getallen2 in D1)
                 {
-                    Console.WriteLine(kvp.Key + " " + kvp.Value);
+                    if ((getallen.Key != getallen2.Key) && (getallen.Value == getallen2.Value))
+                    {
+                        getallenList.Add(getallen.Value);
+                    }
                 }
             }
+
+            foreach(KeyValuePair<int, int> getallen in D1)
+            {
+                if (!getallenList.Contains(getallen.Value))
+                {
+                    lijst.Remove(getallen.Value);
+                }
+            }
+
+            foreach (int getal in lijst)
+            {
+                Console.Write($"{getal} ");
+            }
+
+            Console.WriteLine(" ");
         }
+    
 
 
         /// ------------------------------------------------------------
