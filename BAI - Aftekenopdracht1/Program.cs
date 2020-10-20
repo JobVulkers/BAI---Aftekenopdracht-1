@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BAI
 {
@@ -19,53 +20,35 @@ namespace BAI
         public static void Opdr1FilterList(List<int> lijst)
         {
             Dictionary<int, int> D1 = new Dictionary<int, int>();
-            int i = 0;
-
-            foreach (int getal in lijst)
+            foreach (int i in lijst)
             {
-                D1.Add(i, getal);
-                i++;
-            }
-
-            List<int> getallenList = new List<int>();
-
-            foreach (KeyValuePair<int, int> getallen in D1)
-            {
-                foreach (KeyValuePair<int, int> getallen2 in D1)
+                try
                 {
-                    if ((getallen.Key != getallen2.Key) && (getallen.Value == getallen2.Value))
-                    {
-                        getallenList.Add(getallen.Value);
-                    }
+                    D1.Add(i, 1);
+                }
+                catch (ArgumentException)
+                {
+                    D1[i] = D1[i] + 1;
                 }
             }
-
-            foreach(KeyValuePair<int, int> getallen in D1)
+        
+            for (int j = lijst.Count; j >= 1; j--)
             {
-                if (!getallenList.Contains(getallen.Value))
-                {
-                    lijst.Remove(getallen.Value);
+                if(D1[lijst[j-1]] == 1){
+                    lijst.Remove(lijst[j-1]);
                 }
             }
-
-            foreach (int getal in lijst)
-            {
-                Console.Write($"{getal} ");
-            }
-
-            Console.WriteLine(" ");
         }
-    
 
 
-        /// ------------------------------------------------------------
-        /// <summary>
-        /// Maakt een queue van de getallen 1 t/m 50 (in die volgorde
-        /// toegevoegd)
-        /// </summary>
-        /// <returns>Een queue met hierin 1, 2, 3, .., 50</returns>
-        /// ------------------------------------------------------------
-        public static Queue<int> Opdr2aQueue50()
+            /// ------------------------------------------------------------
+            /// <summary>
+            /// Maakt een queue van de getallen 1 t/m 50 (in die volgorde
+            /// toegevoegd)
+            /// </summary>
+            /// <returns>Een queue met hierin 1, 2, 3, .., 50</returns>
+            /// ------------------------------------------------------------
+            public static Queue<int> Opdr2aQueue50()
         {
             Queue<int> queue = new Queue<int>();
 
